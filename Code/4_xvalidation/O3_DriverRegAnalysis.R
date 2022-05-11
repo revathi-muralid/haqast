@@ -1,5 +1,5 @@
 # Created on: 4/9/22 by RM
-# Last edited: 4/11/22 by RM
+# Last edited: 5/10/22 by RM
 
 rm(list=ls())
 
@@ -14,14 +14,14 @@ library(broom)
 
 setwd("/nas/longleaf/home/revathi/chaq/revathi/mortality_results/RESP/")
 
-dat<-read.csv("MDA8_O3_RESP_PopDrivers.csv")
+dat<-read.csv("MDA8_O3_RESP_ConcDrivers.csv")
 
 dat2<-dat[which(dat$Dataset=="EPA"),]
 dat3<-dat[which(dat$Dataset=="FAQSD"),]
 
 #Regression for each of the 2 datasets - get avg of 2009 and 2010 reg. values
 
-wm9<-36466.0027060435
+wm9<-13205.6606569786
 
 dx=0.5
 
@@ -90,7 +90,7 @@ df_death<-unlist(tot_deaths)
 df_yr<-unlist(myyears)
 out<-do.call(rbind, Map(data.frame, Year=df_yr, Excess.Deaths=df_death))
 
-#write.csv(out,'MDA8_O3_PopOnly_Regression_Results.csv',na="",row.names=F, quote=FALSE)
+#write.csv(out,'MDA1_O3_ConcOnly_Regression_Results.csv',na="",row.names=F, quote=FALSE)
 #out<-read.csv('MDA8_O3_RESP_Regression_Results.csv')
 #out2<-read.csv('MDA1_O3_RESP_Regression_Results.csv')
 
