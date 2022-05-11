@@ -1,5 +1,5 @@
 # Created on: 4/9/22 by RM
-# Last edited: 5/2/22 by RM
+# Last edited: 5/11/22 by RM
 
 rm(list=ls())
 
@@ -14,7 +14,7 @@ library(broom)
 
 setwd("/nas/longleaf/home/revathi/chaq/revathi/mortality_results/ACM/")
 
-dat<-read.csv("PM25_ACM_MortDrivers.csv")
+dat<-read.csv("PM25_ACM_ConcExcDrivers.csv")
 
 dat2<-dat[which(dat$Dataset=="EPA"),]
 dat5<-dat[which(dat$Dataset=="SAT"),]
@@ -23,7 +23,7 @@ dat4<-dat[which(dat$Dataset=="FAQSD"),]
 
 #Regression for each of the 4 datasets - get avg of 2009 and 2010 reg. values
 
-wm9<-127156.1935
+wm9<-124649.155780218
 
 dx=0.5
 
@@ -159,7 +159,7 @@ df_death<-unlist(tot_deaths)
 df_yr<-unlist(myyears)
 out<-do.call(rbind, Map(data.frame, Year=df_yr, Excess.Deaths=df_death))
 
-write.csv(out,'PM25_MortOnly_Regression_Results.csv',na="",row.names=F, quote=FALSE)
+write.csv(out,'PM25_ConcExc_Regression_Results.csv',na="",row.names=F, quote=FALSE)
 
 
 ##### Figures
