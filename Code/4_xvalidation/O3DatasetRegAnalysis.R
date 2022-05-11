@@ -55,11 +55,11 @@ EPA8mort<-mort
 mylm<-lm(Excess.Deaths~poly(Year,1,raw=T), dat3) #NACR
 
 mort=c()
-for(i in 0:10){
+for(i in 0:11){
   myyr=2009+i
-  if(myyr==2017){
-    next
-  }
+  #if(myyr==2017){
+   # next
+  #}
   y=predict(mylm,data.frame(Year=myyr))
   mort[[length(mort)+1]]<-y
 }
@@ -76,6 +76,9 @@ for(i in 0:15){
 }
 
 FAQSDmort<-mort
+
+out_mort<-do.call(rbind, Map(data.frame, EPA1=EPA1mort, EPA8=EPA8mort,NACR=NACRmort,
+                             FAQSD=FAQSDmort))
 
 df_death<-unlist(tot_deaths)
 df_yr<-unlist(myyears)
