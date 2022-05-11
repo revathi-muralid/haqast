@@ -1,5 +1,5 @@
 # Created on: 4/7/22 by RM
-# Last edited: 4/9/22 by RM
+# Last edited: 5/10/22 by RM
 
 rm(list=ls())
 
@@ -22,9 +22,9 @@ dat3<-dat[which(dat$Dataset=="NACR"),]
 dat4<-dat[which(dat$Dataset=="FAQSD"),]
 
 #Regression for each of the 4 datasets - get avg of 2009 and 2010 reg. values
-x=2010
+x=2009
 y09<-c()
-for(i in 2:3){ #2:3 for MDA1, 4:5 for MDA8
+for(i in 4:5){ #2:3 for MDA1, 4:5 for MDA8
   dfn<-paste("dat",i,sep="")
   if(grepl("EPA",get(dfn)$Dataset[1])==T){
     mylm<-lm(Excess.Deaths~poly(Year,2,raw=T), get(dfn))
@@ -38,17 +38,16 @@ for(i in 2:3){ #2:3 for MDA1, 4:5 for MDA8
 }
 
 y9<-y09
-y10<-y09
 
-wm1<-mean(unlist(y9,y10))
-wm8<-mean(unlist(y9,y10))
+wm1<-mean(unlist(y9))
+wm8<-mean(unlist(y9))
 
 dx=0.5
 
 ### OZONE MDA 1 #####
 # Calculate slope using available datasets
 # Average slopes to left and right for each year
-x0=2009.5
+x0=2009
 slopes9<-c()
 for(j in -1:1){
   x=x0+(dx*j)
@@ -73,13 +72,13 @@ myyears<-c()
 tot_deaths<-c()
 m=m1
 y=wm1
-x=2009.5
+x=2009
 tot_deaths[[length(tot_deaths)+1]]<-y
 myyears[[length(myyears)+1]]<-x
 print(paste(y," deaths in ",x,sep=""))
-for(j in 1:21){
+for(j in 1:22){
   y=m*dx+y # get y at +dx years using old y value
-  x=2009.5+(dx*j) #get next x value
+  x=2009+(dx*j) #get next x value
   tot_deaths[[length(tot_deaths)+1]]<-y
   myyears[[length(myyears)+1]]<-x
   print(paste(y," deaths in ",x+dx,sep=""))
@@ -95,11 +94,11 @@ for(j in 1:21){
 #backwards
 m=m1
 y=wm1
-x=2009.5
+x=2009
 print(paste(y," deaths in ",x,sep=""))
-for(k in 1:39){
+for(k in 1:38){
   y=m*-dx+y # get y at +dx years using old y value
-  x=2009.5+(-dx*k) #get next x value
+  x=2009+(-dx*k) #get next x value
   tot_deaths[[length(tot_deaths)+1]]<-y
   myyears[[length(myyears)+1]]<-x
   print(paste(y," deaths in ",x,sep=""))
@@ -120,7 +119,7 @@ out<-do.call(rbind, Map(data.frame, Year=df_yr, Excess.Deaths=df_death))
 # Calculate slope using available datasets
 # Average slopes to left and right for each year
 
-x0=2009.5
+x0=2009
 slopes9<-c()
 for(j in -1:1){
   x=x0+(dx*j)
@@ -145,13 +144,13 @@ myyears<-c()
 tot_deaths<-c()
 m=m1
 y=wm8
-x=2009.5
+x=2009
 tot_deaths[[length(tot_deaths)+1]]<-y
 myyears[[length(myyears)+1]]<-x
 print(paste(y," deaths in ",x,sep=""))
-for(j in 1:15){
+for(j in 1:16){
   y=m*dx+y # get y at +dx years using old y value
-  x=2009.5+(dx*j) #get next x value
+  x=2009+(dx*j) #get next x value
   tot_deaths[[length(tot_deaths)+1]]<-y
   myyears[[length(myyears)+1]]<-x
   print(paste(y," deaths in ",x+dx,sep=""))
@@ -167,11 +166,11 @@ for(j in 1:15){
 #backwards
 m=m1
 y=wm8
-x=2009.5
+x=2009
 print(paste(y," deaths in ",x,sep=""))
-for(k in 1:39){
+for(k in 1:40){
   y=m*-dx+y # get y at +dx years using old y value
-  x=2009.5+(-dx*k) #get next x value
+  x=2009+(-dx*k) #get next x value
   tot_deaths[[length(tot_deaths)+1]]<-y
   myyears[[length(myyears)+1]]<-x
   print(paste(y," deaths in ",x+dx,sep=""))
