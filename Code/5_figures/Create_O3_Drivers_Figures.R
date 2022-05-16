@@ -1,6 +1,6 @@
 
 # Created by: Revathi Muralidharan
-# Last updated: 2/27/22
+# Last updated: 5/13/22
 
 rm(list=ls())
 
@@ -11,11 +11,11 @@ library(data.table)
 library(janitor)
 library(tidyr)
 
-dname=c("NACR")
-pollname=c("O3")
+dname=c("Composite")
+pollname=c("MDA1_O3")
 healthname=c("RESP")
-year1=2009
-yearlast=2016
+year1=1990
+yearlast=2020
 nYear=yearlast-year1
 
 # Set working directory
