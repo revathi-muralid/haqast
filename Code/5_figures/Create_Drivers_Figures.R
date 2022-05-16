@@ -1,6 +1,6 @@
 
 # Created by: Revathi Muralidharan
-# Last updated: 2/3/22
+# Last updated: 5/13/22
 
 rm(list=ls())
 
@@ -12,12 +12,12 @@ library(janitor)
 library(tidyr)
 #/nas/longleaf/home/revathi/HAQAST/thesis/mortality/Drivers/RESP/
 
-dname=c("NACR")
+dname=c("Composite")
 pollname=c("O3")
 healthname=c("RESP")
 setwd(paste("/nas02/depts/ese/chaq/revathi/mortality_results/",healthname,"/",dname,"/Drivers",sep=""))
-year1=2009
-yearlast=2016
+year1=1990
+yearlast=2020
 dat_name=c(paste("/nas/longleaf/home/revathi/chaq/revathi/mortality_results/",healthname,"/",dname,"_",pollname,"_",year1,"-",yearlast,"_sums.csv",sep=""))
 cdat_name=c(paste(dname,"_",pollname,"_",year1,"-",yearlast,"_Conconlysums.csv",sep=""))
 pdat_name=c(paste(dname,"_",pollname,"_",year1,"-",yearlast,"_ConcExcSums.csv",sep=""))
