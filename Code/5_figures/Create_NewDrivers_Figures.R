@@ -1,6 +1,6 @@
 
 # Created by: Revathi Muralidharan
-# Last updated: 2/27/22
+# Last updated: 5/13/22
 
 rm(list=ls())
 
@@ -12,11 +12,11 @@ library(janitor)
 library(tidyr)
 #/nas/longleaf/home/revathi/HAQAST/thesis/mortality/Drivers/RESP/
 
-dname=c("SAT")
+dname=c("Composite")
 pollname=c("PM25")
 healthname=c("ACM")
 setwd(paste("/nas02/depts/ese/chaq/revathi/mortality_results/",healthname,"/",dname,"/Drivers",sep=""))
-year1=2000
+year1=1990
 yearlast=2018
 dat_name=c(paste("/nas/longleaf/home/revathi/chaq/revathi/mortality_results/",healthname,"/",dname,"_",pollname,"_",year1,"-",yearlast,"_sums.csv",sep=""))
 cdat_name=c(paste(dname,"_",pollname,"_",year1,"-",yearlast,"_Conconlysums.csv",sep=""))
@@ -56,9 +56,11 @@ driver_data$linetype<-2
 driver_data[which(driver_data$Dataset=="Total"),]$linetype<-1
 driver_data$myline<-as.factor(driver_data$linetype)
 
+names(driver_data)[2]<-c("Excess Deaths")
+
 options(scipen=999)
-t<-ggplot(driver_data[which(driver_data$'Age Group'=="Total" & driver_data$Pollutant==pollname),],aes(x=Year,y=`Excess Deaths`,group=Dataset,colour=Dataset,linetype=myline))+
-  ggtitle(dname)+
+t<-ggplot(driver_data,aes(x=Year,y=`Excess Deaths`,group=Dataset,colour=Dataset,linetype=myline))+
+  ggtitle("Composite")+
   geom_line()+
   geom_point()+
   guides(linetype=FALSE)+ 
@@ -70,6 +72,7 @@ t<-ggplot(driver_data[which(driver_data$'Age Group'=="Total" & driver_data$Pollu
         plot.background = element_rect(color = "black", size = 0.5),
         panel.border = element_rect(colour = "black", fill=NA, size=0.5))+ 
   ylab("PM2.5 Deaths")+
+  #xlim(1990,2020)+
   scale_color_manual(#name="Dataset",
                      #labels=c("FAQSD","Conc Only", "Conc Exc", "Mort Only", "Pop Only"),
                      values=driver_colors)+
